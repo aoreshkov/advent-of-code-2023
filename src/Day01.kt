@@ -11,7 +11,7 @@ fun main() {
             .mapIndexed { index, s -> ((index + 1) % 10) to s }
         return input
             .map {str ->
-                10 * digits.minWith(compareBy { if(str.indexOf(it.second) > -1) str.indexOf(it.second) else 10000000}).first +
+                10 * digits.map { it.first to str.indexOf(it.second) }.filter { it.second != -1 }.minWith(compareBy { it.second}).first +
                         digits.maxWith(compareBy { str.lastIndexOf(it.second) }).first
             }
             .sumOf { it }
